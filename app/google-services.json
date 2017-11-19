@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "466659724720",
+    "firebase_url": "https://fpfarma-6bf91.firebaseio.com",
+    "project_id": "fpfarma-6bf91",
+    "storage_bucket": "fpfarma-6bf91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466659724720:android:9892c8c3d37879d7",
+        "android_client_info": {
+          "package_name": "com.fpharma.findpharma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466659724720-u3omfeue00183676ru0olq7sd4t7fot9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fpharma.findpharma",
+            "certificate_hash": "cb1b3df7d061f8beac72ba49f37ef7a783cbda13"
+          }
+        },
+        {
+          "client_id": "466659724720-0vsn205lbdr9e8p0ptnmalgoc22f9c2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5jDDwP73btRPGeXMaGOKdX_IT-SjkioY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466659724720-0vsn205lbdr9e8p0ptnmalgoc22f9c2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

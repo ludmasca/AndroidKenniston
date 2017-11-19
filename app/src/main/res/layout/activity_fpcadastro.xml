@@ -1,0 +1,107 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Views.FindPharma"
+    >
+
+    <ImageView
+        android:id="@+id/pharma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pharma2"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textoCadastro"
+        android:text="Cadastre-se "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textSize="44sp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="29dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <Button
+        android:id="@+id/Cancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:layout_marginEnd="40dp"
+        android:layout_alignBaseline="@+id/Cadastrar2"
+        android:layout_alignBottom="@+id/Cadastrar2"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/Cadastrar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar"
+        android:layout_marginBottom="27dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textoCadastro" />
+
+    <EditText
+        android:id="@+id/senhaConfirmacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Confirmar Senha"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:layout_above="@+id/Cancelar"
+        android:layout_alignStart="@+id/senhaCadastro"
+        android:layout_marginBottom="38dp" />
+
+    <EditText
+        android:id="@+id/senhaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:layout_above="@+id/senhaConfirmacao"
+        android:layout_alignStart="@+id/emailCadastro"
+        android:layout_marginBottom="23dp" />
+
+    <EditText
+        android:id="@+id/nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Nome"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_below="@+id/textoCadastro"
+        android:layout_alignStart="@+id/emailCadastro"
+        android:layout_marginTop="46dp" />
+
+    <EditText
+        android:id="@+id/emailCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/sobrenome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Sobrenome"
+        android:ems="10"
+        android:layout_alignBottom="@+id/emailCadastro"
+        android:layout_alignStart="@+id/emailCadastro"
+        android:layout_marginBottom="56dp" />
+
+
+</RelativeLayout>
