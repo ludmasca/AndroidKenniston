@@ -89,10 +89,12 @@ public class Fp_Editar extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     mProgressDialog.dismiss();
                     HashMap<String, String> valores = (HashMap<String, String>) dataSnapshot.child(user.getUid()).getValue();
-                    txtEmail.setText(valores.get("email"));
-                    txtNome.setText(valores.get("nome"));
-                    txtSobrenome.setText(valores.get("sobrenome"));
-                    GlideApp.with(getApplicationContext()).load(valores.get("foto")).into(btnCamera);
+                    if (valores != null && !valores.isEmpty()) {
+                        txtEmail.setText(valores.get("email"));
+                        txtNome.setText(valores.get("nome"));
+                        txtSobrenome.setText(valores.get("sobrenome"));
+                        GlideApp.with(getApplicationContext()).load(valores.get("foto")).into(btnCamera);
+                    }
                 }
 
                 @Override
@@ -165,7 +167,7 @@ public class Fp_Editar extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            mProgressDialog.dismiss();b
+                            mProgressDialog.dismiss();
                             Toast.makeText(Fp_Editar.this, "Ocorreu um erro ao fazer upload da foto.", Toast.LENGTH_SHORT).show();
                         }
                     });
