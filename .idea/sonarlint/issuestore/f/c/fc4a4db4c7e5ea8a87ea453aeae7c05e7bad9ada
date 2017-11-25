@@ -1,13 +1,0 @@
-
-jsquid:MaximumInheritanceDepth"<This class has 8 parents which is greater than 5 authorized.(ÄÅðé8ß„…²ý+
-Csquid:S1068"'Remove this unused "TAG" private field.(ã„×’8ß„…²ý+
-Rsquid:S1068"1Remove this unused "mAuthListener" private field.(£õ–õúÿÿÿÿ8ß„…²ý+
-Fsquid:S00108")Either remove or fill this block of code.(å¥ž‡8ß„…²ý+
-¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™¦‹ùþÿÿÿÿ8…Íˆ²ý+
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(½ë¿í8ß„…²ý+
-ksquid:S00116"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ã„×’8ß„…²ý+
-`squid:HiddenFieldCheck"9Rename "mAuth" which hides the field declared at line 39.(²ƒ¶â8ß„…²ý+
-œsquid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‹ö›n8ãˆ²ý+
-Ysquid:S1068"8Remove this unused "REQ_SIGN_IN_REQUIRED" private field.(ê¶™‚ýÿÿÿÿ8ß„…²ý+
-ysquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(¯¼É©ýÿÿÿÿ8ß„…²ý+
-Vsquid:S1068"5Remove this unused "googleAccountName" private field.(ìÁõ‰ýÿÿÿÿ8ß„…²ý+

@@ -52,6 +52,11 @@ public class FindPharma extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_pharma);
 
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            Intent it = new Intent(FindPharma.this, Fp_Logado.class);
+            startActivity(it);
+        }
+
         txtEmail = (EditText) findViewById(R.id.email);
         txtSenha = (EditText) findViewById(R.id.senha);
 

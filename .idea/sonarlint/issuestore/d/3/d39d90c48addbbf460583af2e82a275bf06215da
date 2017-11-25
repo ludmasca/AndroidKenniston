@@ -1,10 +1,0 @@
-
-hsquid:MaximumInheritanceDepth"<This class has 8 parents which is greater than 5 authorized.(óŸ‚íüÿÿÿÿ
-rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(¯¼É©ýÿÿÿÿ
-Psquid:S1068"4Remove this unused "mGoogleApiClient" private field.(Ÿõ¸Ú8æ…Ü°ý+
-ksquid:S00116"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ã„×’8úâ¯°ý+
-Ksquid:S1068"1Remove this unused "mAuthListener" private field.(£õ–õúÿÿÿÿ
-Vsquid:S1068"5Remove this unused "googleAccountName" private field.(ìÁõ‰ýÿÿÿÿ8°Ùä°ý+
-Csquid:S1068"'Remove this unused "TAG" private field.(ã„×’8°Ùä°ý+
-Jsquid:S1068".Remove this unused "RC_SIGN_IN" private field.(üž†ð8°Ùä°ý+
-Ysquid:S1068"8Remove this unused "REQ_SIGN_IN_REQUIRED" private field.(ê¶™‚ýÿÿÿÿ8°Ùä°ý+

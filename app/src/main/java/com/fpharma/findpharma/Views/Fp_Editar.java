@@ -1,5 +1,6 @@
 package com.fpharma.findpharma.Views;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -20,16 +21,27 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fpharma.findpharma.R;
+import com.fpharma.findpharma.Servicos.GlideApp;
 import com.fpharma.findpharma.Servicos.ImageProvider;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 public class Fp_Editar extends AppCompatActivity {
 
@@ -45,26 +57,49 @@ public class Fp_Editar extends AppCompatActivity {
 
     private Uri pictureUri;
     private String photoPath;
+    Bitmap bitmap;
     String photoBase64;
-    EditText txtUsuario;
-    EditText txtTelefone;
+
+    EditText txtNome;
+    EditText txtSobrenome;
+    EditText txtEmail;
     ImageView btnCamera;
 
     DatabaseReference mDb = FirebaseDatabase.getInstance().getReference();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    StorageReference storageRef = FirebaseStorage.getInstance().getReference().child(user.getUid());
+    final ProgressDialog mProgressDialog = new ProgressDialog(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fp__editar);
 
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Aguarde");
 
-        txtTelefone = (EditText) findViewById(R.id.telefone);
-        txtUsuario = (EditText) findViewById(R.id.nomeUsuario);
+        txtEmail = (EditText) findViewById(R.id.email);
+        txtNome = (EditText) findViewById(R.id.nomeUsuario);
+        txtSobrenome = (EditText) findViewById(R.id.sobreNomeUsuario);
 
         if (user != null) {
-            txtTelefone.setText(user.getEmail());
-            txtUsuario.setText(user.getDisplayName());
+            mProgressDialog.show();
+            mDb.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    mProgressDialog.dismiss();
+                    HashMap<String, String> valores = (HashMap<String, String>) dataSnapshot.child(user.getUid()).getValue();
+                    txtEmail.setText(valores.get("email"));
+                    txtNome.setText(valores.get("nome"));
+                    txtSobrenome.setText(valores.get("sobrenome"));
+                    GlideApp.with(getApplicationContext()).load(valores.get("foto")).into(btnCamera);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
         btnCamera = (ImageView) findViewById(R.id.cam);
@@ -78,24 +113,7 @@ public class Fp_Editar extends AppCompatActivity {
             }
         });
 
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (txtTelefone.getText() != null && txtTelefone.getText().toString().equals("")) {
-                    Toast.makeText(Fp_Editar.this, "Nome Inválido!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                if (txtUsuario.getText() != null && txtUsuario.getText().toString().equals("")) {
-                    Toast.makeText(Fp_Editar.this, "Sobrenome Inválido!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mDb.child(user.getUid()).child("nome").setValue(txtUsuario.getText().toString());
-                mDb.child(user.getUid()).child("telefone").setValue(txtTelefone.getText().toString());
-                mDb.child(user.getUid()).child("foto").setValue(photoBase64);
-                Intent it = new Intent(Fp_Editar.this, Fp_Logado.class);
-                startActivity(it);
-            }
-        });
+        btnSalvar.setOnClickListener(getSalvarListener());
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +122,56 @@ public class Fp_Editar extends AppCompatActivity {
                 startActivity(it);
             }
         });
+    }
+
+    @NonNull
+    private View.OnClickListener getSalvarListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (txtEmail.getText() != null && txtEmail.getText().toString().equals("")) {
+                    Toast.makeText(Fp_Editar.this, "Email Inválido!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (txtNome.getText() != null && txtNome.getText().toString().equals("")) {
+                    Toast.makeText(Fp_Editar.this, "Nome Inválido!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (txtSobrenome.getText() != null && txtSobrenome.getText().toString().equals("")) {
+                    Toast.makeText(Fp_Editar.this, "Sobrenome Inválido!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                mProgressDialog.show();
+                mDb.child(user.getUid()).child("nome").setValue(txtNome.getText().toString());
+                mDb.child(user.getUid()).child("sobrenome").setValue(txtNome.getText().toString());
+                mDb.child(user.getUid()).child("email").setValue(txtEmail.getText().toString());
+
+                if (bitmap != null) {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
+                    UploadTask uploadTask = storageRef.putBytes(data);
+                    uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            Uri downloadUrl = task.getResult().getDownloadUrl();
+                            mDb.child(user.getUid()).child("foto").setValue(downloadUrl.toString());
+                            mProgressDialog.dismiss();
+                            Intent it = new Intent(Fp_Editar.this, Fp_Logado.class);
+                            startActivity(it);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            mProgressDialog.dismiss();b
+                            Toast.makeText(Fp_Editar.this, "Ocorreu um erro ao fazer upload da foto.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        };
     }
 
     private void openCamera() {
@@ -143,9 +211,10 @@ public class Fp_Editar extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == CAMERA_REQUEST_CODE) {
-                photoBase64 = encodeImage(photoPath);
-                Uri uri = ImageProvider.getInstance().getImageUri(this, photoPath);
-                btnCamera.setImageURI(uri);
+//                photoBase64 = encodeImage(photoPath);
+//                Uri uri = ImageProvider.getInstance().getImageUri(this, photoPath);
+                bitmap = ImageProvider.getInstance().resizeRotatePicture(photoPath);
+                btnCamera.setImageBitmap(bitmap);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -174,7 +243,7 @@ public class Fp_Editar extends AppCompatActivity {
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
         String encImage = Base64.encodeToString(b, Base64.DEFAULT);
-        //Base64.de
+//Base64.de
         return encImage;
 
     }
