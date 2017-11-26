@@ -68,13 +68,14 @@ public class Fp_Editar extends AppCompatActivity {
     DatabaseReference mDb = FirebaseDatabase.getInstance().getReference();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     StorageReference storageRef = FirebaseStorage.getInstance().getReference().child(user.getUid());
-    final ProgressDialog mProgressDialog = new ProgressDialog(this);
+    ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fp__editar);
 
+        mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Aguarde");
 
@@ -227,7 +228,6 @@ public class Fp_Editar extends AppCompatActivity {
         if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
             openCamera();
         }
-
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
