@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidKenniston.iml" filepath="$PROJECT_DIR$/AndroidKenniston.iml" />
-      <module fileurl="file://C:\Users\danil\Documents\Projetos\AndroidKenniston\AndroidKenniston-master.iml" filepath="C:\Users\danil\Documents\Projetos\AndroidKenniston\AndroidKenniston-master.iml" />
-      <module fileurl="file://C:\Users\danil\Downloads\AndroidKenniston-master\FindPharma.iml" filepath="C:\Users\danil\Downloads\AndroidKenniston-master\FindPharma.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\danil\Downloads\AndroidKenniston-master\app\app.iml" filepath="C:\Users\danil\Downloads\AndroidKenniston-master\app\app.iml" />
     </modules>
   </component>
 </project>

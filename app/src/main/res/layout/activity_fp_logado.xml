@@ -11,33 +11,32 @@
         android:id="@+id/pharma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
         android:src="@drawable/pharma2"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/listar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp"
         android:text="Listar Farmácias"
         tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="160dp" />
+        tools:layout_editor_absoluteY="160dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="103dp" />
 
     <Button
         android:id="@+id/editar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="170dp"
         android:text="Editar perfil"
         tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="288dp" />
+        tools:layout_editor_absoluteY="288dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

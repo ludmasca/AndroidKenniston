@@ -63,6 +63,7 @@ public class Fp_Editar extends AppCompatActivity {
     EditText txtNome;
     EditText txtSobrenome;
     EditText txtEmail;
+    EditText txtTel;
     ImageView btnCamera;
 
     DatabaseReference mDb = FirebaseDatabase.getInstance().getReference();
@@ -80,6 +81,7 @@ public class Fp_Editar extends AppCompatActivity {
         mProgressDialog.setMessage("Aguarde");
 
         txtEmail = (EditText) findViewById(R.id.email);
+        txtTel = (EditText) findViewById(R.id.tel);
         txtNome = (EditText) findViewById(R.id.nomeUsuario);
         txtSobrenome = (EditText) findViewById(R.id.sobreNomeUsuario);
 
@@ -94,7 +96,8 @@ public class Fp_Editar extends AppCompatActivity {
                         txtEmail.setText(valores.get("email"));
                         txtNome.setText(valores.get("nome"));
                         txtSobrenome.setText(valores.get("sobrenome"));
-                        GlideApp.with(getApplicationContext()).load(valores.get("foto")).into(btnCamera);
+                        txtTel.setText(valores.get("telefone"));
+                        GlideApp.with(getApplicationContext()).load(valores.get("avatar")).into(btnCamera);
                     }
                 }
 
@@ -145,11 +148,16 @@ public class Fp_Editar extends AppCompatActivity {
                     Toast.makeText(Fp_Editar.this, "Sobrenome Inválido!", Toast.LENGTH_LONG).show();
                     return;
                 }
+                if (txtTel.getText() != null && txtTel.getText().toString().equals("")) {
+                    Toast.makeText(Fp_Editar.this, "Telefone Inválido!", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 mProgressDialog.show();
                 mDb.child(user.getUid()).child("nome").setValue(txtNome.getText().toString());
-                mDb.child(user.getUid()).child("sobrenome").setValue(txtNome.getText().toString());
+                mDb.child(user.getUid()).child("sobrenome").setValue(txtSobrenome.getText().toString());
                 mDb.child(user.getUid()).child("email").setValue(txtEmail.getText().toString());
+                mDb.child(user.getUid()).child("telefone").setValue(txtTel.getText().toString());
 
                 if (bitmap != null) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -160,7 +168,7 @@ public class Fp_Editar extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                             Uri downloadUrl = task.getResult().getDownloadUrl();
-                            mDb.child(user.getUid()).child("foto").setValue(downloadUrl.toString());
+                            mDb.child(user.getUid()).child("avatar").setValue(downloadUrl.toString());
                             mProgressDialog.dismiss();
                             Intent it = new Intent(Fp_Editar.this, Fp_Logado.class);
                             startActivity(it);

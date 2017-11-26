@@ -43,6 +43,15 @@
         android:ems="10"
         android:hint="Email" />
 
+    <EditText
+        android:id="@+id/tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/email"
+        android:layout_below="@+id/email"
+        android:ems="10"
+        android:hint="Telefone" />
+
     <Button
         android:id="@+id/salvar"
         android:layout_width="wrap_content"
